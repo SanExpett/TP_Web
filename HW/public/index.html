@@ -33,20 +33,18 @@
   <body class="d-flex flex-column h-100">
     <nav class="navbar navbar-expand-lg">
         <div class="container-lg">
-            <a class="navbar-brand" href="">Ask</a>
+            <a class="navbar-brand" href="">JustAsk</a>
             <div class="collapse navbar-collapse justify-content-between navbar-nav mb-2 mb-lg-0" id="navbarSupportedContent">
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit">Ask</button>
                 </form>
-                <div>
-                    <div class='d-flex flex-row align-items-center gap-3'>
-                        <img class="avatar" src="../static/img/css_ava.svg"/>
-                        <div>
-                            <p class="mb-2">Nikita</p>
-                            <a href="">Settings</a>
-                            <a href="">Log out</a>
-                        </div>
+                <div class='d-flex flex-row align-items-center gap-3'>
+                    <img class="avatar" src="../static/img/css_ava.svg"/>
+                    <div>
+                        <p class="mb-2">Nikita</p>
+                        <a href="">Settings</a>
+                        <a href="">Log out</a>
                     </div>
                 </div>
             </div>
@@ -54,12 +52,12 @@
     </nav>
 
 <!-- Begin page content -->
-<main class="flex-shrink-0">
+<main class="flex-shrink-0 pt-3 pb-sm-3">
     <div class="container">
         <div class="row">
             <div class="col-8">
                 <h2>Questions</h2>
-                <div class="question">
+                <div class="question mt-sm-3">
                     <div class="row">
                         <div class="col-2">
                             <img src="../static/img/css_ava.svg" alt="" class="question-image">
@@ -74,12 +72,12 @@
                                 sunt in culpa qui officia deserunt mollit anim id est laborum.
                             </div>
                         </div>
-                        <div class = "g-4" style="display: flex;">
+                        <div class = "g-4 d-flex">
                             <div class="col-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
                             </div>
-                            <div class="col-2" style="font-size: 20px;"><a href="">answer (3)</a></div>
-                            <div class="col-7" style="font-size: 20px;">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+                            <div class="col-2 fs-5"><a href="">answer (3)</a></div>
+                            <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
                         </div>
                     </div>
                 </div>
@@ -98,12 +96,12 @@
                                 sunt in culpa qui officia deserunt mollit anim id est laborum.
                             </div>
                         </div>
-                        <div class = "g-4" style="display: flex;">
+                        <div class = "g-4 d-flex">
                             <div class="col-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
                             </div>
-                            <div class="col-2" style="font-size: 20px;"><a href="">answer (3)</a></div>
-                            <div class="col-7" style="font-size: 20px;">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+                            <div class="col-2 fs-5"><a href="">answer (3)</a></div>
+                            <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
                         </div>
                     </div>
                 </div>
@@ -122,12 +120,12 @@
                                 sunt in culpa qui officia deserunt mollit anim id est laborum.
                             </div>
                         </div>
-                        <div class = "g-4" style="display: flex;">
+                        <div class = "g-4 d-flex">
                             <div class="col-2">
                             <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
                             </div>
-                            <div class="col-2" style="font-size: 20px;"><a href="">answer (3)</a></div>
-                            <div class="col-7" style="font-size: 20px;">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+                            <div class="col-2 fs-5"><a href="">answer (3)</a></div>
+                            <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
                         </div>
                     </div>
                 </div>
@@ -135,31 +133,31 @@
             <div class="col-4">
                 <div class="row">
                     <h2>Popular tags</h2>
-                    <div class='text-wrap d-flex gap-3 flex-wrap' style='align-self: right; width: 300px'>
-                      <div class='program-lang' style='font-weight: bold;'>
-                          <span style='color: #ff6347;'>Java</span>
+                    <div class='text-wrap d-flex gap-3 flex-wrap align-self-sm-auto w-75'>
+                      <div class='program-lang fw-bolder'>
+                          <a class="link-primary" href="">Java</a>
                       </div>
-                      <div class='program-lang' style='font-weight: bold;'>
-                        <span style='color: #00bfff;'>.NET</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-secondary" href="">.NET</a>
                       </div>
-                      <div class="program-lang" style='font-weight: bold;'>
-                        <span style='color: red;'>PHP</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-success" href="">PHP</a>
                       </div>
-                      <div class="program-lang" style='font-weight: bold;'>
-                        <span style='color: green;'>JavaScript</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-danger" href="">JavaScript</a>
                       </div>
-                      <div class="program-lang" style='font-weight: bold;'>
-                        <span>C</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-warning" href="">C</a>
                       </div>
-                      <div class="program-lang" style='font-weight: bold;'>
-                        <span>C++</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-info" href="">C++</a>
                       </div>
-                      <div class="program-lang" style='font-weight: bold;'>
-                        <span style='color: gray;'>Python</span>
+                      <div class='program-lang fw-bolder'>
+                        <a class="link-primary" href="">Python</a>
                       </div>
                   </div>
                     <h2>Best Members</h2>
-                    <ul class="list-group" style="margin-left:15px; max-width: 250px;">
+                    <ul class="list-group ms-sm-3 w-75">
                         <li class="list-group-item"><a href="">Mr.Freeman</a></li>
                         <li class="list-group-item"><a href="">A second item</a></li>
                         <li class="list-group-item"><a href="">A third item</a></li>
