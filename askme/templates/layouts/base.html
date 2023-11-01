@@ -1,13 +1,11 @@
-<!doctype html>
+{% load static %}
+
 <html class="h-100" lang="en">
 <meta charset="UTF-8">
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"/>
-    <!-- Custom styles for this template -->
-
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
-<meta name="theme-color" content="#7952b3">
+    <link rel="stylesheet" type="text/css" href='../static/css/main.css'/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %} "/>
+    <meta name="theme-color" content="#7952b3">
 
 
     <style>
@@ -30,18 +28,17 @@
     <!-- Custom styles for this template -->
     <link href="sticky-footer-navbar.css" rel="stylesheet">
   </head>
-<body class="d-flex flex-column h-100">
-   <nav class="navbar navbar-expand-lg p-3">
+  <body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-lg p-2">
         <div class="container-lg">
-            <a class="navbar-brand" href="">JustAsk</a>
+            <a class="navbar-brand" href="{% url 'index' %}">JustAsk</a>
             <div class="collapse navbar-collapse justify-content-between navbar-nav mb-2 mb-lg-0" id="navbarSupportedContent">
                 <form class="d-flex m-0">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit">Ask</button>
                 </form>
                 <div class='d-flex flex-row align-items-center gap-3'>
-                    <a href="">Log in</a>
-                    <a href="">Register</a>
+                    {% block auth %}{% endblock auth %}
                 </div>
             </div>
         </div>
@@ -52,43 +49,7 @@
     <div class="container">
         <div class="row">
             <div class="col-8">
-                <h2>Registration</h2>
-                <div class="row">
-                    <div class="container">
-                      <div class="login-form">
-                        <div class="alert alert-danger w-50 p-2 mt-3" role="alert">
-                          Sorry, this email address already registered!
-                        </div>
-                        <form class="mt-4 w-50">
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Login</span>
-                            <input type="text" class="form-control" id="login" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Email</span>
-                            <input type="email" class="form-control" id="email" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Nickname</span>
-                            <input type="text" class="form-control" id="nickname" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Password</span>
-                            <input type="password" class="form-control" id="password" required>
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text">Repeat password</span>
-                            <input type="password" class="form-control" id="password_confirm" required>
-                          </div>
-                          <div class="mb-4">
-                              <label for="formFile" class="form-label">Upload avatar</label>
-                              <input class="form-control" type="file" id="formFile">
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
-                        </form>
-                      </div>
-                    </div>
-                </div>
+                {% block content %}{% endblock %}
             </div>
             <div class="col-4">
                 <div class="row">

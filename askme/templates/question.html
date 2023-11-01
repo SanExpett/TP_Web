@@ -1,209 +1,60 @@
-<!doctype html>
-<html class="h-100" lang="en">
-<meta charset="UTF-8">
-<head>
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"/>
-    <!-- Custom styles for this template -->
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
-<meta name="theme-color" content="#7952b3">
+{% block auth %}
+    {% include 'components/auth_on_nav.html' %}
+{% endblock auth %}
 
+{% block content %}
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
-  </head>
-  <body class="d-flex flex-column h-100">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-lg">
-            <a class="navbar-brand" href="">JustAsk</a>
-            <div class="collapse navbar-collapse justify-content-between navbar-nav mb-2 mb-lg-0" id="navbarSupportedContent">
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Ask</button>
-                </form>
-                <div class='d-flex flex-row align-items-center gap-3'>
-                    <img class="avatar" src="../static/img/css_ava.svg"/>
-                    <div>
-                        <p class="mb-2">Nikita</p>
-                        <a href="">Settings</a>
-                        <a href="">Log out</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-<!-- Begin page content -->
-<main class="flex-shrink-0 pt-3 pb-sm-3">
-    <div class="container">
+<div class="question-primary">
+    <div class="row">
         <div class="row">
-            <div class="col-8">
-                <div class="question-primary">
-                    <div class="row">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="../static/img/css_ava.svg" alt="" class="question-image-primary">
-                            </div>
-                            <div class="col-9">
-                                <div class="question-title"><a href="">Question</a></div>
-                                <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </div>
-                            </div>
-                            <div class = "g-4 d-flex">
-                                <div class="col-3">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
-                                </div>
-                                <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
-                            </div>
+            <div class="col-3">
+                <img alt="" class="question-image-primary" src="../static/img/css_ava.svg">
+            </div>
+            <div class="col-9">
+                <div class="question-title"><a href=""> {{question.title}} </a></div>
+                <div class="question-text">
+                    {{ question.content}}
+                </div>
+            </div>
+            <div class="g-4 d-flex">
+                <div class="col-3">
+                    <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
+                </div>
+                <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+            </div>
+        </div>
+        <hr class="bg-dark border-2 border-top border-dark g-3"/>
+        {% for comment in comments %}
+        <div class="question">
+            <div class="row">
+                <div class="col-2">
+                    <img alt="" class="question-image" src="../static/img/css_ava.svg">
+                </div>
+                <div class="col-10">
+                    <div class="question-text">
+                        {{ comment.content }}
+                    </div>
+                </div>
+                <div class="g-4 d-flex">
+                    <div class="col-2">
+                        <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
+                    </div>
+                    <div class="col-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="6"/>
+                            <label class="form-check-label">Correct!</label>
                         </div>
-                        <hr class="bg-dark border-2 border-top border-dark g-3" />
-                        <div class="question">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="../static/img/css_ava.svg" alt="" class="question-image">
-                                </div>
-                                <div class="col-10">
-                                    <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                        sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class = "g-4 d-flex">
-                                    <div class="col-2">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
-                                    </div>
-                                    <div class="col-10">
-                                    <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" value="6"/>
-                                          <label class="form-check-label">Correct!</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="question g-4">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="../static/img/css_ava.svg" alt="" class="question-image">
-                                </div>
-                                <div class="col-10">
-                                    <div class="question-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                        sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
-                                <div class = "g-4 d-flex">
-                                    <div class="col-2">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="button">Like</button>
-                                    </div>
-                                    <div class="col-10">
-                                    <div class="form-check">
-                                          <input class="form-check-input" type="checkbox" value="6"/>
-                                          <label class="form-check-label">Correct!</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <nav aria-label="..." class="g-4 ps-sm-0">
-                          <ul class="pagination">
-                            <li class="page-item disabled">
-                              <a class="page-link">Previous</a>
-                            </li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                              <a class="page-link" href="#">Next</a>
-                            </li>
-                          </ul>
-                        </nav>
-                        <hr class="bg-dark border-2 border-top border-dark g-2" />
-                        <div class="form-group ps-sm-0">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your answer here"></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary col-2 g-3" >Answer</button>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="row">
-                    <h2>Popular tags</h2>
-                    <div class='text-wrap d-flex gap-3 flex-wrap align-self-sm-auto w-75'>
-                      <div class='program-lang fw-bolder'>
-                          <a class="link-primary" href="">Java</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-secondary" href="">.NET</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-success" href="">PHP</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-danger" href="">JavaScript</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-warning" href="">C</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-info" href="">C++</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-primary" href="">Python</a>
-                      </div>
-                  </div>
-                    <h2>Best Members</h2>
-                    <ul class="list-group ms-sm-3 w-75">
-                        <li class="list-group-item"><a href="">Mr.Freeman</a></li>
-                        <li class="list-group-item"><a href="">A second item</a></li>
-                        <li class="list-group-item"><a href="">A third item</a></li>
-                        <li class="list-group-item"><a href="">A fourth item</a></li>
-                        <li class="list-group-item"><a href="">And a fifth item</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
+        {% endfor %}
     </div>
-</main>
+</div>
 
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-    </div>
-</footer>
+{% include 'components/paginator.html' with root='question'%}
 
-
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
