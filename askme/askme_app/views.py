@@ -3,14 +3,14 @@ from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 
 QUESTIONS = [
     {
-        'id': i,
-        'title': f'Question {i}',
-        'content': f'Long lorem ipsum {i}',
-    } for i in range(20)
+        'id': i-1,
+        'title': f'Question {i-1}',
+        'content': f'Long lorem ipsum {i-1}',
+    } for i in range(1, 20)
 ]
 
 def paginate(objects, page, per_page=5):
-    paginator = Paginator(QUESTIONS, per_page)
+    paginator = Paginator(objects, per_page)
     default_page = 1
     try:
         items_page = paginator.page(page)
@@ -31,12 +31,12 @@ def question(request, question_id):
         {
             'id': i,
             'content': f'Long lorem ipsum {i}',
-        } for i in range(30)
+        } for i in range(1, 30)
     ]
     page = request.GET.get('page', 1)
     items_page = paginate(comments, page)
     item = QUESTIONS[question_id]
-    return render(request, 'question.html', {'question': item, 'comments': items_page, 'pages': items_page})
+    return render(request, 'question.html', {'question': item, 'comments': items_page, 'pages': items_page, 'question_id': question_id})
 
 def ask(request):
     return render(request, 'ask.html')

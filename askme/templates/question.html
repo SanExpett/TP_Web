@@ -11,7 +11,7 @@
     <div class="row">
         <div class="row">
             <div class="col-3">
-                <img alt="" class="question-image-primary" src="../static/img/css_ava.svg">
+                <img alt="" class="question-image-primary" src="{% static '/img/css_ava.svg' %}">
             </div>
             <div class="col-9">
                 <div class="question-title"><a href=""> {{question.title}} </a></div>
@@ -28,33 +28,11 @@
         </div>
         <hr class="bg-dark border-2 border-top border-dark g-3"/>
         {% for comment in comments %}
-        <div class="question">
-            <div class="row">
-                <div class="col-2">
-                    <img alt="" class="question-image" src="../static/img/css_ava.svg">
-                </div>
-                <div class="col-10">
-                    <div class="question-text">
-                        {{ comment.content }}
-                    </div>
-                </div>
-                <div class="g-4 d-flex">
-                    <div class="col-2">
-                        <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
-                    </div>
-                    <div class="col-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="6"/>
-                            <label class="form-check-label">Correct!</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include 'components/comment-item.html' %}
         {% endfor %}
     </div>
 </div>
 
-{% include 'components/paginator.html' with root='question'%}
+{% include 'components/paginator.html' with root='question' question_id=question.id%}
 
 {% endblock %}
