@@ -17,8 +17,10 @@
             <div class="col-2">
                 <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
             </div>
-            <div class="col-2 fs-5"><a href="">answer (3)</a></div>
-            <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+            <div class="col-2 fs-5"><a href="{% url 'question' question_id=question.id %}">answer (3)</a></div>
+            <div class="col-7 fs-5 program-lang">
+                Tags: <a href="{% url 'tag' tag_name="Python"%}" class="badge bg-primary">Python</a> <a href="{% url 'tag' tag_name="JavaScript"%}" class="badge bg-primary">JavaScript</a>
+            </div>
         </div>
     </div>
 </div>

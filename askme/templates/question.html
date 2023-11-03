@@ -14,7 +14,7 @@
                 <img alt="" class="question-image-primary" src="{% static '/img/css_ava.svg' %}">
             </div>
             <div class="col-9">
-                <div class="question-title"><a href=""> {{question.title}} </a></div>
+                <div class="question-title"> {{question.title}} </div>
                 <div class="question-text">
                     {{ question.content}}
                 </div>
@@ -23,7 +23,9 @@
                 <div class="col-3">
                     <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
                 </div>
-                <div class="col-7 fs-5">Tags: <a href="">shishka</a> <a href="">aboba</a></div>
+                 <div class="col-7 fs-5 program-lang">
+                Tags: <a href="{% url 'tag' tag_name="Python"%}" class="badge bg-primary">Python</a> <a href="{% url 'tag' tag_name="JavaScript"%}" class="badge bg-primary">JavaScript</a>
+                </div>
             </div>
         </div>
         <hr class="bg-dark border-2 border-top border-dark g-3"/>

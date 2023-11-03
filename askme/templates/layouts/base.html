@@ -28,17 +28,15 @@
 
   </head>
   <body class="d-flex flex-column h-100">
-    <nav class="navbar navbar-expand-lg p-2">
+    <nav class="navbar navbar-expand-lg nav-40">
         <div class="container-lg">
             <a class="navbar-brand" href="{% url 'index' %}">JustAsk</a>
             <div class="collapse navbar-collapse justify-content-between navbar-nav mb-2 mb-lg-0" id="navbarSupportedContent">
                 <form class="d-flex m-0">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Ask</button>
+                     <a class="btn btn-outline-dark" href="{% url 'ask' %}">Ask</a>
                 </form>
-                <div class='d-flex flex-row align-items-center gap-3'>
-                    {% block auth %}{% endblock auth %}
-                </div>
+                {% block auth %}{% endblock auth %}
             </div>
         </div>
     </nav>
@@ -55,25 +53,25 @@
                     <h2>Popular tags</h2>
                     <div class='text-wrap d-flex gap-3 flex-wrap align-self-sm-auto w-75'>
                       <div class='program-lang fw-bolder'>
-                          <a class="link-primary" href="">Java</a>
+                          <a class="link-primary" href="{% url 'tag' tag_name="Java"%}">Java</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-secondary" href="">.NET</a>
+                        <a class="link-secondary" href="{% url 'tag' tag_name=".NET"%}">.NET</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-success" href="">PHP</a>
+                        <a class="link-success" href="{% url 'tag' tag_name="PHP"%}">PHP</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-danger" href="">JavaScript</a>
+                        <a class="link-danger" href="{% url 'tag' tag_name="JavaScript"%}">JavaScript</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-warning" href="">C</a>
+                        <a class="link-warning" href="{% url 'tag' tag_name="C"%}">C</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-info" href="">C++</a>
+                        <a class="link-info" href="{% url 'tag' tag_name="C++"%}">C++</a>
                       </div>
                       <div class='program-lang fw-bolder'>
-                        <a class="link-primary" href="">Python</a>
+                        <a class="link-primary" href="{% url 'tag' tag_name="Python"%}">Python</a>
                       </div>
                   </div>
                     <h2>Best Members</h2>
@@ -97,6 +95,6 @@
 </footer>
 
 
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>

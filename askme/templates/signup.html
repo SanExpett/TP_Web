@@ -1,144 +1,47 @@
-<!doctype html>
-<html class="h-100" lang="en">
-<meta charset="UTF-8">
-<head>
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css"/>
-    <!-- Custom styles for this template -->
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
-<meta name="theme-color" content="#7952b3">
+{% block auth %}
+    {% include 'components/signup_on_nav.html' %}
+{% endblock auth %}
 
-
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-
-    <!-- Custom styles for this template -->
-    <link href="sticky-footer-navbar.css" rel="stylesheet">
-  </head>
-<body class="d-flex flex-column h-100">
-   <nav class="navbar navbar-expand-lg p-3">
-        <div class="container-lg">
-            <a class="navbar-brand" href="">JustAsk</a>
-            <div class="collapse navbar-collapse justify-content-between navbar-nav mb-2 mb-lg-0" id="navbarSupportedContent">
-                <form class="d-flex m-0">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Ask</button>
-                </form>
-                <div class='d-flex flex-row align-items-center gap-3'>
-                    <a href="">Log in</a>
-                    <a href="">Register</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-<!-- Begin page content -->
-<main class="flex-shrink-0 pt-3 pb-sm-3">
+{% block content %}
+<h2>Registration</h2>
+<div class="row">
     <div class="container">
-        <div class="row">
-            <div class="col-8">
-                <h2>Registration</h2>
-                <div class="row">
-                    <div class="container">
-                      <div class="login-form">
-                        <div class="alert alert-danger w-50 p-2 mt-3" role="alert">
-                          Sorry, this email address already registered!
-                        </div>
-                        <form class="mt-4 w-50">
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Login</span>
-                            <input type="text" class="form-control" id="login" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Email</span>
-                            <input type="email" class="form-control" id="email" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Nickname</span>
-                            <input type="text" class="form-control" id="nickname" required>
-                          </div>
-                          <div class="input-group mb-4">
-                            <span class="input-group-text">Password</span>
-                            <input type="password" class="form-control" id="password" required>
-                          </div>
-                          <div class="input-group mb-3">
-                            <span class="input-group-text">Repeat password</span>
-                            <input type="password" class="form-control" id="password_confirm" required>
-                          </div>
-                          <div class="mb-4">
-                              <label for="formFile" class="form-label">Upload avatar</label>
-                              <input class="form-control" type="file" id="formFile">
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
-                        </form>
-                      </div>
-                    </div>
-                </div>
+        <div class="login-form">
+            <div class="alert alert-danger w-50 p-2 mt-3" role="alert">
+                Sorry, this email address already registered!
             </div>
-            <div class="col-4">
-                <div class="row">
-                    <h2>Popular tags</h2>
-                    <div class='text-wrap d-flex gap-3 flex-wrap align-self-sm-auto w-75'>
-                      <div class='program-lang fw-bolder'>
-                          <a class="link-primary" href="">Java</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-secondary" href="">.NET</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-success" href="">PHP</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-danger" href="">JavaScript</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-warning" href="">C</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-info" href="">C++</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-primary" href="">Python</a>
-                      </div>
-                  </div>
-                    <h2>Best Members</h2>
-                    <ul class="list-group ms-sm-3 w-75">
-                        <li class="list-group-item"><a href="">Mr.Freeman</a></li>
-                        <li class="list-group-item"><a href="">A second item</a></li>
-                        <li class="list-group-item"><a href="">A third item</a></li>
-                        <li class="list-group-item"><a href="">A fourth item</a></li>
-                        <li class="list-group-item"><a href="">And a fifth item</a></li>
-                    </ul>
+            <form class="mt-4 w-50">
+                <div class="input-group mb-4">
+                    <span class="input-group-text">Login</span>
+                    <input type="text" class="form-control" id="login" required>
                 </div>
-            </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text">Email</span>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text">Nickname</span>
+                    <input type="text" class="form-control" id="nickname" required>
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-text">Password</span>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Repeat password</span>
+                    <input type="password" class="form-control" id="password_confirm" required>
+                </div>
+                <div class="mb-4">
+                    <label for="formFile" class="form-label">Upload avatar</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+            </form>
         </div>
     </div>
-</main>
+</div>
 
-<footer class="footer mt-auto py-3 bg-light">
-    <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-    </div>
-</footer>
-
-
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}

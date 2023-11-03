@@ -1,13 +1,18 @@
 from django.shortcuts import render
+from django.http import HttpResponseBadRequest
+from django.http import HttpResponse
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 
 QUESTIONS = [
     {
-        'id': i-1,
-        'title': f'Question {i-1}',
-        'content': f'Long lorem ipsum {i-1}',
-    } for i in range(1, 20)
+        'id': i,
+        'title': f'Question {i}',
+        'content': f'Long lorem ipsum {i}',
+    } for i in range(20)
 ]
+
+TAGS = {"Java", ".NET", "PHP", "JavaScript", "C", "C++", "Python"}
+
 
 def paginate(objects, page, per_page=5):
     paginator = Paginator(objects, per_page)
@@ -20,6 +25,8 @@ def paginate(objects, page, per_page=5):
         items_page = paginator.page(paginator.num_pages)
     return items_page
 # Create your views here.
+
+
 def index(request):
     page = request.GET.get('page', 1)
     items_page = paginate(QUESTIONS, page)
@@ -27,24 +34,46 @@ def index(request):
 
 
 def question(request, question_id):
+    if question_id > 19:
+        return HttpResponseBadRequest()
+    page = request.GET.get('page', 1)
     comments = [
         {
             'id': i,
             'content': f'Long lorem ipsum {i}',
-        } for i in range(1, 30)
+        } for i in range(30)
     ]
-    page = request.GET.get('page', 1)
     items_page = paginate(comments, page)
     item = QUESTIONS[question_id]
-    return render(request, 'question.html', {'question': item, 'comments': items_page, 'pages': items_page, 'question_id': question_id})
+    return render(request, 'question.html', {'question': item, 'comments': items_page,
+                                             'pages': items_page, 'question_id': question_id})
+
 
 def ask(request):
     return render(request, 'ask.html')
 
+
 def signup(request):
     return render(request, 'signup.html')
+
 
 def login(request):
     return render(request, 'login.html')
 
 
+def hot(request):
+    page = request.GET.get('page', 1)
+    items_page = paginate(QUESTIONS, page)
+    return render(request, 'hot.html', {'questions': items_page, 'pages': items_page})
+
+
+def settings(request):
+    return render(request, 'settings.html')
+
+
+def tag(request, tag_name):
+    if tag_name not in TAGS:
+        return HttpResponseBadRequest()
+    page = request.GET.get('page', 1)
+    items_page = paginate(QUESTIONS, page)
+    return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page})

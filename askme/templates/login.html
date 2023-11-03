@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block auth %}
-    {% include 'components/auth_on_nav.html' %}
+    {% include 'components/signup_on_nav.html' %}
 {% endblock auth %}
 
 {% block content %}
@@ -17,15 +17,15 @@
                 <form class="mt-4 w-50">
                     <div class="input-group mb-4">
                         <span class="input-group-text">Login</span>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" required>
                     </div>
                     <div class="input-group mb-4">
                         <span class="input-group-text">Password</span>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" class="form-control" id="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mb-3">Log In</button>
                 </form>
-                <a href="">Create a new account</a>
+                <a href="{% url 'signup' %}">Create a new account</a>
             </div>
         </div>
     </div>
