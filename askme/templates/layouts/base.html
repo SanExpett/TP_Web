@@ -52,35 +52,17 @@
                 <div class="row">
                     <h2>Popular tags</h2>
                     <div class='text-wrap d-flex gap-3 flex-wrap align-self-sm-auto w-75'>
-                      <div class='program-lang fw-bolder'>
-                          <a class="link-primary" href="{% url 'tag' tag_name="Java"%}">Java</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-secondary" href="{% url 'tag' tag_name=".NET"%}">.NET</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-success" href="{% url 'tag' tag_name="PHP"%}">PHP</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-danger" href="{% url 'tag' tag_name="JavaScript"%}">JavaScript</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-warning" href="{% url 'tag' tag_name="C"%}">C</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-info" href="{% url 'tag' tag_name="C++"%}">C++</a>
-                      </div>
-                      <div class='program-lang fw-bolder'>
-                        <a class="link-primary" href="{% url 'tag' tag_name="Python"%}">Python</a>
-                      </div>
+                        {% for tag in tags %}
+                        <div class='program-lang fw-bolder'>
+                          <a class="link-primary" href="{% url 'tag' tag_name=tag.name %}">{{ tag.name }}</a>
+                        </div>
+                        {% endfor %}
                   </div>
                     <h2>Best Members</h2>
                     <ul class="list-group ms-sm-3 w-75">
-                        <li class="list-group-item"><a href="">Mr.Freeman</a></li>
-                        <li class="list-group-item"><a href="">A second item</a></li>
-                        <li class="list-group-item"><a href="">A third item</a></li>
-                        <li class="list-group-item"><a href="">A fourth item</a></li>
-                        <li class="list-group-item"><a href="">And a fifth item</a></li>
+                        {% for some_user in users %}
+                          <li class="list-group-item"><a href="">{{ some_user.user.username }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

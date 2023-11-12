@@ -7,7 +7,7 @@
         </div>
         <div class="col-10">
             <div class="question-title">
-                <a href="{% url 'question' question_id=question.id %}">{{ question.title }}</a>
+                <a href="{% url 'question' question_id=question.id %}">{{ question.title }} </a>
             </div>
             <div class="question-text">
                 {{ question.content }}
@@ -15,11 +15,14 @@
         </div>
         <div class="g-4 d-flex">
             <div class="col-2">
-                <button class="btn btn-primary" data-bs-toggle="button" type="button">Like</button>
+                <button class="btn btn-primary" data-bs-toggle="button" type="button">{{ question.get_likes_count }}</button>
             </div>
-            <div class="col-2 fs-5"><a href="{% url 'question' question_id=question.id %}">answer (3)</a></div>
-            <div class="col-7 fs-5 program-lang">
-                Tags: <a href="{% url 'tag' tag_name="Python"%}" class="badge bg-primary">Python</a> <a href="{% url 'tag' tag_name="JavaScript"%}" class="badge bg-primary">JavaScript</a>
+            <div class="col-2 fs-5"><a href="{% url 'question' question_id=question.id %}">answer ({{ question.get_answers_count }})</a></div>
+            <div class="col-5 fs-5 program-lang">
+                Tags:
+                {% for tag in question.tags.all %}
+              <a class="badge bg-primary" id="tag-{{forloop.counter}}" href="{% url 'tag' tag_name=tag.name %}">{{tag.name}}</a>
+                {% endfor %}
             </div>
         </div>
     </div>

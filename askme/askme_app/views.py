@@ -2,19 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponse
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
-
-QUESTIONS = [
-    {
-        'id': i,
-        'title': f'Question {i}',
-        'content': f'Long lorem ipsum {i}',
-    } for i in range(20)
-]
-
-TAGS = {"Java", ".NET", "PHP", "JavaScript", "C", "C++", "Python"}
+from askme_app.models import Question, Tag, Comment, Profile
 
 
-def paginate(objects, page, per_page=5):
+def paginate(objects, page, per_page=10):
     paginator = Paginator(objects, per_page)
     default_page = 1
     try:
@@ -24,56 +15,67 @@ def paginate(objects, page, per_page=5):
     except EmptyPage:
         items_page = paginator.page(paginator.num_pages)
     return items_page
-# Create your views here.
 
 
 def index(request):
+    questions = Question.manager.get_new_questions()
     page = request.GET.get('page', 1)
-    items_page = paginate(QUESTIONS, page)
-    return render(request, 'index.html', {'questions': items_page, 'pages': items_page})
+    items_page = paginate(questions, page)
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'index.html', {'questions': items_page, 'pages': items_page, 'tags': top_tags, 'users': top_users})
 
 
 def question(request, question_id):
-    if question_id > 19:
+    try:
+        item = Question.manager.get_question_by_id(question_id)
+    except:
         return HttpResponseBadRequest()
     page = request.GET.get('page', 1)
-    comments = [
-        {
-            'id': i,
-            'content': f'Long lorem ipsum {i}',
-        } for i in range(30)
-    ]
-    items_page = paginate(comments, page)
-    item = QUESTIONS[question_id]
+    comments = Comment.objects.filter(question=question_id)
+    items_page = paginate(comments, page, 5)
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
     return render(request, 'question.html', {'question': item, 'comments': items_page,
-                                             'pages': items_page, 'question_id': question_id})
+                                             'pages': items_page, 'question_id': question_id, 'tags': top_tags,'users': top_users})
 
 
 def ask(request):
-    return render(request, 'ask.html')
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'ask.html', {'tags': top_tags,'users': top_users})
 
 
 def signup(request):
-    return render(request, 'signup.html')
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'signup.html', {'tags': top_tags,'users': top_users})
 
 
 def login(request):
-    return render(request, 'login.html')
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'login.html', {'tags': top_tags,'users': top_users})
 
 
 def hot(request):
     page = request.GET.get('page', 1)
-    items_page = paginate(QUESTIONS, page)
-    return render(request, 'hot.html', {'questions': items_page, 'pages': items_page})
+    items_page = paginate(Question.manager.get_top_questions(), page)
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'hot.html', {'questions': items_page, 'pages': items_page, 'tags': top_tags,'users': top_users})
 
 
 def settings(request):
-    return render(request, 'settings.html')
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'settings.html', {'tags': top_tags,'users': top_users})
 
 
 def tag(request, tag_name):
-    if tag_name not in TAGS:
-        return HttpResponseBadRequest()
     page = request.GET.get('page', 1)
-    items_page = paginate(QUESTIONS, page)
-    return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page})
+    tag_item = Tag.manager.get_questions_by_tag(tag_name)
+    items_page = paginate(tag_item, page)
+    top_tags = Tag.manager.top_of_tags(10)
+    top_users = Profile.manager.get_top_users(10)
+    return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page, 'tags': top_tags,'users': top_users})

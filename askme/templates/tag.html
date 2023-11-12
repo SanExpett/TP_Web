@@ -1,9 +1,12 @@
 {% extends 'layouts/base.html' %}
-{%  load static %}
+{% load static %}
+
 {% block auth %}
     {% include 'components/auth_on_nav.html' %}
 {% endblock auth %}
+
 {% block content %}
+
 <h2 class="mb-4">Tag: {{ tag }}</h2>
 
 {% for question in questions %}
@@ -14,4 +17,4 @@
 
 {% include 'components/paginator.html' with root='tag' %}
 
-{% endblock %}
+{% endblock content%}

@@ -7,7 +7,8 @@
 
 {% block content %}
 
-<h2>Questions</h2>
+<h2><a href="{% url 'index' %}" class="item-active">New Questions</a></h2>
+<h2><a href="{% url 'hot' %}" class="item">Hot Questions</a></h2>
 
 {% for question in questions %}
 

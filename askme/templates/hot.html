@@ -7,8 +7,8 @@
 
 {% block content %}
 
-<h2>Hot questions</h2>
-
+<h2><a href="{% url 'index' %}" class="item">New Questions</a></h2>
+<h2><a href="{% url 'hot' %}" class="item-active">Hot Questions</a></h2>
 {% for question in questions %}
 
 {% include 'components/question-item.html' %}

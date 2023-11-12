@@ -76,6 +76,39 @@ header {
     margin: 0;
 }
 
+h2 > a {
+    text-decoration: none;
+    color: black;
+}
+
+h2 {
+    display: inline;
+}
+
+h2 + h2::before {
+    content: "|";
+    color: black;
+    margin-right: 5px;
+}
+
 .program-lang > a{
     text-decoration: none;
+}
+.program-lang {
+    line-height: 35px;
+}
+
+.item:hover, .item-active:hover {
+    color: rgb(128, 128, 128);
+
+}
+
+.item {
+    text-decoration: none;
+    color: black;
+}
+
+.item-active {
+    text-decoration: none;
+    color: rgb(128, 128, 128);
 }
