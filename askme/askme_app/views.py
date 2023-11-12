@@ -3,7 +3,7 @@ from django.http import HttpResponseBadRequest
 from django.http import HttpResponse
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 from askme_app.models import Question, Tag, Comment, Profile
-
+from django.db.models import Count
 
 def paginate(objects, page, per_page=10):
     paginator = Paginator(objects, per_page)
@@ -20,7 +20,7 @@ def paginate(objects, page, per_page=10):
 def index(request):
     questions = Question.manager.get_new_questions()
     page = request.GET.get('page', 1)
-    items_page = paginate(questions, page)
+    items_page = paginate(questions, page, 20)
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
     return render(request, 'index.html', {'questions': items_page, 'pages': items_page, 'tags': top_tags, 'users': top_users})
@@ -32,8 +32,8 @@ def question(request, question_id):
     except:
         return HttpResponseBadRequest()
     page = request.GET.get('page', 1)
-    comments = Comment.objects.filter(question=question_id)
-    items_page = paginate(comments, page, 5)
+    comments = Comment.manager.get_comments_ordered_by_likes(question_id)
+    items_page = paginate(comments, page, 30)
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
     return render(request, 'question.html', {'question': item, 'comments': items_page,
@@ -75,7 +75,7 @@ def settings(request):
 def tag(request, tag_name):
     page = request.GET.get('page', 1)
     tag_item = Tag.manager.get_questions_by_tag(tag_name)
-    items_page = paginate(tag_item, page)
+    items_page = paginate(tag_item.order_by('-create_date'), page)
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
     return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page, 'tags': top_tags,'users': top_users})

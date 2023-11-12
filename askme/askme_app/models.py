@@ -8,11 +8,14 @@ from django.db.models import Count
 
 class ProfileManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().annotate(question_count=Count('questions')).order_by('-question_count')
+        return super().get_queryset().annotate(
+            popular_question_count=Count('questions'),
+            popular_answer_count=Count('comments')
+        )
 
     def get_top_users(self, n):
-        qs = self.get_queryset()[:n]
-        return [profile for profile in qs if profile.question_count > 0]
+        qs = self.get_queryset().order_by('-popular_question_count', '-popular_answer_count')[:n]
+        return qs
 
 
 class Profile(models.Model):
@@ -25,8 +28,8 @@ class Profile(models.Model):
 
 
 class QuestionManager(models.Manager):
-    def get_new_questions(self):
 
+    def get_new_questions(self):
         return Question.manager.all().order_by('-create_date')
 
     def get_top_questions(self):
@@ -56,12 +59,20 @@ class Question(models.Model):
         return self.question_likes.count()
 
 
+class CommentManager(models.Manager):
+    def get_comments_ordered_by_likes(self, question_id):
+        comments = self.filter(question=question_id).annotate(num_likes=Count('comment_likes')).order_by('-num_likes',
+                                                                                                         '-create_date')
+        return comments
+
+
 class Comment(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='comments')
     question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='comments')
     create_date = models.DateTimeField(auto_now=True)
     content = models.TextField()
     is_correct = models.BooleanField(default=False)
+    manager = CommentManager()
 
     def __str__(self):
         return f"Comment {self.content}"
