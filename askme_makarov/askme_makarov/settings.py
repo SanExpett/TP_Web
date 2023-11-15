@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'askme_app',
-    'askme_app.templatetags.paginate'
+    'askme_app'
 ]
 
 MIDDLEWARE = [
