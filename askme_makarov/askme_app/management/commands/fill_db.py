@@ -45,7 +45,7 @@ class Command(BaseCommand):
                 question=random.choice(questions),
                 create_date=fake.date_time(),
                 content=fake.paragraph(),
-                is_correct=fake.pybool()
+                is_correct=False
             ) for _ in range(ratio * 100)
         ]
         Comment.objects.bulk_create(comments)
