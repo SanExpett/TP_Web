@@ -105,6 +105,7 @@ class QuestionLikeManager(models.Manager):
         else:
             self.create(author=user, question=question)
 
+
 class QuestionLike(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='question_likes')
     question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='question_likes')
