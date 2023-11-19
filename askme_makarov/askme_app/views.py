@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, HttpResponse
 from django.core.paginator import (Paginator, EmptyPage, PageNotAnInteger)
 from askme_app.models import Question, Tag, Comment, Profile
-from django.urls import reverse
 
 
 def paginate(objects,request, per_page=20):
@@ -35,8 +34,7 @@ def question(request, question_id):
     items_page = paginate(comments, request, 30)
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
-    url = reverse('question', args=[question_id])
-    return render(request, 'question.html', {'question': item, 'comments': items_page, 'url': url,
+    return render(request, 'question.html', {'question': item, 'comments': items_page,
                                              'pages': items_page, 'question_id': question_id, 'tags': top_tags,'users': top_users})
 
 
@@ -72,9 +70,8 @@ def settings(request):
 
 
 def tag(request, tag_name):
-    url = reverse('tag', args=[tag_name])
     tag_item = Tag.manager.get_questions_by_tag(tag_name)
     items_page = paginate(tag_item.order_by('-create_date'), request)
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
-    return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page, 'tags': top_tags,'users': top_users, 'url': url})
+    return render(request, 'tag.html', {'tag': tag_name, 'questions': items_page, 'pages': items_page, 'tags': top_tags,'users': top_users})
