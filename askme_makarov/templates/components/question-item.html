@@ -15,7 +15,15 @@
         </div>
         <div class="g-4 d-flex">
             <div class="col-2">
-                <button class="btn btn-primary" data-bs-toggle="button" type="button">{{ question.get_likes_count }}</button>
+                <i class="fas fa-arrow-down fa-lg"></i>
+                {% if question.get_likes_count > 0 %}
+                    <span class="text-success mx-1">{{ question.get_likes_count }}</span>
+                {% elif question.get_likes_count < 0 %}
+                    <span class="text-danger mx-1">{{ question.get_likes_count }}</span>
+                    {% else %}
+                    <span class="mx-1">{{ question.get_likes_count }}</span>
+                {% endif %}
+                <i class="fas fa-arrow-up fa-lg "></i>
             </div>
             <div class="col-2 fs-5"><a href="{% url 'question' question_id=question.id %}">answer ({{ question.get_answers_count }})</a></div>
             <div class="col-5 fs-5 program-lang">

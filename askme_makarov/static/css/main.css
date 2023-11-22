@@ -112,3 +112,11 @@ h2 + h2::before {
     text-decoration: none;
     color: rgb(128, 128, 128);
 }
+
+.fa-arrow-down:hover {
+    color: red;
+}
+
+.fa-arrow-up:hover {
+    color: green;
+}
