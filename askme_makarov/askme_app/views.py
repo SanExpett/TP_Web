@@ -32,6 +32,7 @@ def question(request, question_id):
         return HttpResponseBadRequest()
     comments = Comment.manager.get_comments_ordered_by_likes(question_id)
     items_page = paginate(comments, request, 30)
+
     top_tags = Tag.manager.top_of_tags(10)
     top_users = Profile.manager.get_top_users(10)
     return render(request, 'question.html', {'question': item, 'comments': items_page,

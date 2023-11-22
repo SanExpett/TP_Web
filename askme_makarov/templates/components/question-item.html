@@ -7,7 +7,7 @@
         </div>
         <div class="col-10">
             <div class="question-title">
-                <a href="{% url 'question' question_id=question.id %}">{{ question.title }} </a>
+                <a class="item" href="{% url 'question' question_id=question.id %}">{{ question.title }} </a>
             </div>
             <div class="question-text">
                 {{ question.content }}
@@ -15,21 +15,25 @@
         </div>
         <div class="g-4 d-flex">
             <div class="col-2">
-                <i class="fas fa-arrow-down fa-lg"></i>
                 {% if question.get_likes_count > 0 %}
+                    <i class="fas fa-arrow-down fa-lg"></i>
                     <span class="text-success mx-1">{{ question.get_likes_count }}</span>
+                    <i class="fas fa-arrow-up fa-lg text-success"></i>
                 {% elif question.get_likes_count < 0 %}
+                    <i class="fas fa-arrow-down fa-lg text-danger"></i>
                     <span class="text-danger mx-1">{{ question.get_likes_count }}</span>
+                    <i class="fas fa-arrow-up fa-lg"></i>
                     {% else %}
+                    <i class="fas fa-arrow-down fa-lg"></i>
                     <span class="mx-1">{{ question.get_likes_count }}</span>
+                    <i class="fas fa-arrow-up fa-lg "></i>
                 {% endif %}
-                <i class="fas fa-arrow-up fa-lg "></i>
             </div>
-            <div class="col-2 fs-5"><a href="{% url 'question' question_id=question.id %}">answer ({{ question.get_answers_count }})</a></div>
+            <div class="col-2 fs-5"><a class="item" href="{% url 'question' question_id=question.id %}"><i class="fas fa-comment-dots"></i> {{ question.get_answers_count }}</a></div>
             <div class="col-5 fs-5 program-lang">
                 Tags:
                 {% for tag in question.tags.all %}
-              <a class="badge bg-primary" id="tag-{{forloop.counter}}" href="{% url 'tag' tag_name=tag.name %}">{{tag.name}}</a>
+              <a class="badge bg-dark item" id="tag-{{forloop.counter}}" href="{% url 'tag' tag_name=tag.name %}">{{tag.name}}</a>
                 {% endfor %}
             </div>
         </div>
