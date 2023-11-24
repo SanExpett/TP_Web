@@ -1,8 +1,12 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
-
 {% block auth %}
-    {% include 'components/signup_on_nav.html' %}
+    {% if user.is_authenticated %}
+        {% include 'components/auth_on_nav.html' %}
+    {% else %}
+        {% include 'components/signup_on_nav.html' %}
+    {% endif %}
 {% endblock auth %}
 
 {% block content %}
@@ -11,19 +15,10 @@
     <div class="row">
         <div class="container">
             <div class="login-form">
-                <div class="alert alert-danger w-50 p-2 mt-3" role="alert">
-                    Sorry, wrong password!
-                </div>
-                <form class="mt-4 w-50">
-                    <div class="input-group mb-4">
-                        <span class="input-group-text">Login</span>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="input-group mb-4">
-                        <span class="input-group-text">Password</span>
-                        <input type="password" class="form-control" id="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block mb-3">Log In</button>
+                <form class="mt-4 w-50" method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form login_form %}
+                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
                 </form>
                 <a href="{% url 'signup' %}">Create a new account</a>
             </div>

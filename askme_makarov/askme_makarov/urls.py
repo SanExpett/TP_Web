@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from askme_app import views
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('hot', views.hot, name='hot'),
     path('settings/', views.settings, name='settings'),
@@ -25,6 +26,6 @@ urlpatterns = [
     path('question/<int:question_id>', views.question, name='question'),
     path('ask/', views.ask, name='ask'),
     path('signup/', views.signup, name='signup'),
-    path('login/', views.login, name='login'),
-    path('admin/', admin.site.urls)
+    path('login/', views.log_in, name='login'),
+    path('logout/', views.log_out, name='logout'),
 ]

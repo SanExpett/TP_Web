@@ -17,6 +17,12 @@ class ProfileManager(models.Manager):
         qs = self.get_queryset().order_by('-popular_question_count', '-popular_answer_count')[:n]
         return qs
 
+    def get_user_by_id(self, user_id):
+        return User.objects.get(pk=user_id)
+
+    def get_profile_by_id(self, user_id):
+        return Profile.manager.get(user_id=user_id)
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -45,7 +51,7 @@ class Question(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='questions')
     create_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=64)
-    content = models.TextField()
+    content = models.TextField(max_length=255)
     tags = models.ManyToManyField('Tag', related_name='questions')
     manager = QuestionManager()
 
@@ -62,7 +68,7 @@ class Question(models.Model):
 class CommentManager(models.Manager):
     def get_comments_ordered_by_likes(self, question_id):
         comments = self.filter(question=question_id).annotate(num_likes=Count('comment_likes')).order_by('-num_likes',
-                                                                                                         '-create_date')
+                                                                                                         'create_date')
         return comments
 
 
@@ -70,7 +76,7 @@ class Comment(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='comments')
     question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='comments')
     create_date = models.DateTimeField(auto_now=True)
-    content = models.TextField()
+    content = models.TextField(max_length=255)
     is_correct = models.BooleanField(default=False)
     manager = CommentManager()
 

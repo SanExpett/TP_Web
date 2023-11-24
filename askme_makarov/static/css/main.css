@@ -66,6 +66,10 @@ header {
     margin-bottom: 10px;
 }
 
+.question-text {
+    word-break: break-all;
+}
+
 .question-image-primary {
     width: 150px;
     height: 150px;

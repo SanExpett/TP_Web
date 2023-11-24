@@ -1,31 +1,22 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
 {% load static %}
 
 {% block auth %}
-    {% include 'components/auth_on_nav.html' %}
+    {% if user.is_authenticated %}
+        {% include 'components/auth_on_nav.html' %}
+    {% else %}
+        {% include 'components/signup_on_nav.html' %}
+    {% endif %}
 {% endblock auth %}
 
 {% block content %}
 
 <div class="col-8">
-    <h2>Settings: Nikita</h2>
+    <h2>Settings: {{ user.username }}</h2>
     <form action="" class="col-7 mt-sm-3" method="POST">
-        <div class='mb-3'>
-            <label class='form-label' for='login'>Login</label>
-            <input class='form-control' id='login' type='text' value='Nikita'>
-        </div>
-        <div class='mb-3'>
-            <label class='form-label' for='email'>Settings</label>
-            <input class='form-control' id='email' type='email' value='nikita10062004m@gmail.com'>
-        </div>
-        <div class='mb-3'>
-            <label class='form-label' for='nickname'>Nickname</label>
-            <input class='form-control' id='nickname' type='text' value='Nikita'>
-        </div>
-        <div class='mb-3'>
-            <label class='form-label' for='avatar'>Upload avatar</label>
-            <input class='form-control' id='avatar' type='file'>
-        </div>
+        {% csrf_token %}
+        {% bootstrap_form settings_form %}
         <button class="btn btn-primary btn-block mb-3" type="submit">Save</button>
     </form>
 </div>

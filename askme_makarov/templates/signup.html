@@ -1,8 +1,13 @@
 {% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}s
 {% load static %}
 
 {% block auth %}
-    {% include 'components/signup_on_nav.html' %}
+    {% if user.is_authenticated %}
+        {% include 'components/auth_on_nav.html' %}
+    {% else %}
+        {% include 'components/signup_on_nav.html' %}
+    {% endif %}
 {% endblock auth %}
 
 {% block content %}
@@ -10,34 +15,9 @@
 <div class="row">
     <div class="container">
         <div class="login-form">
-            <div class="alert alert-danger w-50 p-2 mt-3" role="alert">
-                Sorry, this email address already registered!
-            </div>
-            <form class="mt-4 w-50">
-                <div class="input-group mb-4">
-                    <span class="input-group-text">Login</span>
-                    <input type="text" class="form-control" id="login" required>
-                </div>
-                <div class="input-group mb-4">
-                    <span class="input-group-text">Email</span>
-                    <input type="email" class="form-control" id="email" required>
-                </div>
-                <div class="input-group mb-4">
-                    <span class="input-group-text">Nickname</span>
-                    <input type="text" class="form-control" id="nickname" required>
-                </div>
-                <div class="input-group mb-4">
-                    <span class="input-group-text">Password</span>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Repeat password</span>
-                    <input type="password" class="form-control" id="password_confirm" required>
-                </div>
-                <div class="mb-4">
-                    <label for="formFile" class="form-label">Upload avatar</label>
-                    <input class="form-control" type="file" id="formFile">
-                </div>
+            <form enctype="multipart/form-data" class="mt-4 w-50" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form user_form %}
                 <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
             </form>
         </div>

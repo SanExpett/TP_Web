@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block auth %}
-    {% include 'components/auth_on_nav.html' %}
+    {% if user.is_authenticated %}
+        {% include 'components/auth_on_nav.html' %}
+    {% else %}
+        {% include 'components/signup_on_nav.html' %}
+    {% endif %}
 {% endblock auth %}
 
 {% block content %}
