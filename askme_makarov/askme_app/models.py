@@ -47,6 +47,7 @@ class QuestionManager(models.Manager):
         return Question.manager.get(pk=id)
 
 
+
 class Question(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='questions')
     create_date = models.DateTimeField(auto_now=True)
@@ -95,6 +96,8 @@ class TagManager(models.Manager):
         tag = Tag.manager.get(name=tag_name)
         return tag.questions.all()
 
+    def get_all_tag_names(self):
+        return list(self.get_queryset().values_list('name', flat=True))
 
 class Tag(models.Model):
     name = models.CharField(max_length=25, unique=True)

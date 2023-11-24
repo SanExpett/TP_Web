@@ -139,6 +139,8 @@ class AskForm(forms.ModelForm):
         tags = input_tags.split(',')
         if len(tags) > 3:
             raise ValidationError("More than three tags have been entered!")
+        if len(tags) != len(set(tags)):
+            raise ValidationError("Tags must be unique!")
         return input_tags
 
     def save(self):

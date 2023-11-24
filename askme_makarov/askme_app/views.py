@@ -70,7 +70,7 @@ def ask(request):
             new_question = ask_form.save()
             if new_question:
                 return redirect('question', question_id=new_question.id)
-    return render(request, 'ask.html', {'tags': top_tags,'users': top_users, 'ask_form':ask_form})
+    return render(request, 'ask.html', {'tags': top_tags,'users': top_users, 'ask_form':ask_form, 'all_tags': Tag.manager.get_all_tag_names()})
 
 
 def signup(request):
