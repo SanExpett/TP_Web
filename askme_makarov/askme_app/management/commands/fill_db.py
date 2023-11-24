@@ -48,8 +48,8 @@ class Command(BaseCommand):
                 is_correct=False
             ) for _ in range(ratio * 100)
         ]
-        Comment.objects.bulk_create(comments)
-        comments = Comment.objects.all()
+        Comment.manager.bulk_create(comments)
+        comments = Comment.manager.all()
         questions = Question.manager.all()
         existing_likes = set()
         desired_likes = ratio * 100

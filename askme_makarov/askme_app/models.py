@@ -47,7 +47,6 @@ class QuestionManager(models.Manager):
         return Question.manager.get(pk=id)
 
 
-
 class Question(models.Model):
     author = models.ForeignKey('Profile', on_delete=models.CASCADE, related_name='questions')
     create_date = models.DateTimeField(auto_now=True)
@@ -99,6 +98,7 @@ class TagManager(models.Manager):
     def get_all_tag_names(self):
         return list(self.get_queryset().values_list('name', flat=True))
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=25, unique=True)
     manager = TagManager()
@@ -108,7 +108,7 @@ class Tag(models.Model):
 
 
 class QuestionLikeManager(models.Manager):
-    def like_question(self, user, question):
+    def toggle_like(self, user, question):
         if self.filter(author=user, question=question).exists():
             self.filter(author=user, question=question).delete()
         else:
@@ -121,7 +121,7 @@ class QuestionLike(models.Model):
 
 
 class CommentLikeManager(models.Manager):
-    def like_comment(self, user, comment):
+    def toggle_like(self, user, comment):
         if self.filter(author=user, comment=comment).exists():
             self.filter(author=user, comment=comment).delete()
         else:
